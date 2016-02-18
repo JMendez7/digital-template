@@ -29,6 +29,7 @@ window.onload = function() {
     var background;
     var surface;
     var theme;
+    var controls;
     
     function create()
     {
@@ -54,16 +55,45 @@ window.onload = function() {
         player.body.colliderWorldBounds = true;
         
         // Player's Movements
-        player.animations.add('left', [5,4,3,2,1]);
+        player.animations.add('left', [4, 3, 2, 1, 18, 17, 16]);
         player.animations.add('right');
+        
+        // Keyboard controls
+        controls = game.input.keyboard.createCursorKeys();
         
         // Sets up music
         theme = game.add.audio('core');
         theme.play();
     }
     
+    function movements()
+    {
+        player.body.velocity.x = 0;
+        
+        if (controls.left.isDown)
+        {
+            player.body.velocity.x = -159;
+            
+            player.animations.play('left', 30, true);
+        }
+        else if (controls.right.isDown)
+        {
+            player.body.velocity.x = 150;
+            
+            player.animations.play('right', 30, true);
+        }
+        else
+        {
+            player.animations.stop();
+            
+            player.frame = 5;
+        }
+    }
+    
     function update()
     {
         game.physics.arcade.collide(player, surface);
+        
+        movements();
     }
 };
