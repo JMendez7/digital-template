@@ -33,6 +33,9 @@ window.onload = function() {
     
     function create()
     {
+        //
+        game.world.resize(6000, 600);
+        
         // Enable Arcade Physics
         game.physics.startSystem(Phaser.Physics.ARCADE);
         
@@ -47,11 +50,12 @@ window.onload = function() {
         floor.body.immovable = true;
         
         // Creates the player
-        player = game.add.sprite(game.world.centerX, game.world.height - 106, 'mummy');
+        player = game.add.sprite(0, game.world.height - 106, 'mummy');
+        player.fixedToCamer = true;
         
         // Player's Physics
         game.physics.arcade.enable(player);
-        player.body.gravity.y = 100;
+        player.body.gravity.y = 250;
         player.body.colliderWorldBounds = true;
         
         // Player's Movements
@@ -73,15 +77,19 @@ window.onload = function() {
         // Horizontal Movements
         if (controls.left.isDown)
         {
-            player.body.velocity.x = -159;
+            player.body.velocity.x = -150;
             
             player.animations.play('left', 30, true);
+            
+            game.camera.x -= 4;
         }
         else if (controls.right.isDown)
         {
             player.body.velocity.x = 150;
             
             player.animations.play('right', 30, true);
+            
+            game.camera.x +- 4;
         }
         else
         {
