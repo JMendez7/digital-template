@@ -34,7 +34,7 @@ window.onload = function() {
     function create()
     {
         //
-        game.world.resize(6000, 600);
+        game.world.resize(5120, 600);
         
         // Enable Arcade Physics
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -46,12 +46,25 @@ window.onload = function() {
         surface = game.add.group();
         surface.enableBody = true;
         
-        var floor = surface.create(0, game.world.height - 64, 'ground');
+        var floor
+        // Floor 1
+        floor = surface.create(0, game.world.height - 64, 'ground');
+        floor.body.immovable = true;
+        // Floor 2
+        floor = surface.create(1024, game.world.height - 64, 'ground');
+        floor.body.immovable = true;
+        // Floor 3
+        floor = surface.create(2048, game.world.height - 64, 'ground');
+        floor.body.immovable = true;
+        // Floor 4
+        floor = surface.create(3072, game.world.height - 64, 'ground');
+        floor.body.immovable = true;
+        // Floor 5
+        floor = surface.create(4096, game.world.height - 64, 'ground');
         floor.body.immovable = true;
         
         // Creates the player
         player = game.add.sprite(0, game.world.height - 106, 'mummy');
-        player.fixedToCamer = true;
         
         // Player's Physics
         game.physics.arcade.enable(player);
@@ -64,6 +77,8 @@ window.onload = function() {
         
         // Keyboard controls
         controls = game.input.keyboard.createCursorKeys();
+        
+        game.camera.follow(player);
         
         // Sets up music
         theme = game.add.audio('core');
