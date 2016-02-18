@@ -70,6 +70,7 @@ window.onload = function() {
     {
         player.body.velocity.x = 0;
         
+        // Horizontal Movements
         if (controls.left.isDown)
         {
             player.body.velocity.x = -159;
@@ -87,6 +88,12 @@ window.onload = function() {
             player.animations.stop();
             
             player.frame = 5;
+        }
+        
+        // Vertical Movements
+        if (controls.up.isDown && player.body.touching.down)
+        {
+            player.body.velocity.y = -150;
         }
     }
     
