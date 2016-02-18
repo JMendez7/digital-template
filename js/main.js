@@ -33,19 +33,20 @@ window.onload = function() {
     
     function create()
     {
-        //
-        game.world.resize(5120, 600);
+        // Game World Size
+        game.world.resize(5120, 3100);
         
         // Enable Arcade Physics
         game.physics.startSystem(Phaser.Physics.ARCADE);
         
-        // Set game background
-        background = game.add.image(0, 0, 'space');
+        // Sets game background
+        background = game.add.image(0, 100, 'space');
         
         // Creates the surface
         surface = game.add.group();
         surface.enableBody = true;
         
+        // Creates the ground.
         var floor
         // Floor 1
         floor = surface.create(0, game.world.height - 64, 'ground');
