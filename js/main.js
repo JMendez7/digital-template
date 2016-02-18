@@ -16,29 +16,54 @@ window.onload = function() {
     var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
     
     function preload()
-    {
+    {   
         game.load.image('space', 'assets/pics/space.png');
         game.load.image('ground', 'assets/pics/ground.png');
+        
         game.load.spritesheet('mummy', 'assets/sprites/metalslug_mummy37x45.png', 37, 45, 18);
+        
         game.load.audio('core', 'assets/audio/core.mp3');
     }
     
     var player;
     var background;
+    var surface;
     var theme;
     
     function create()
     {
+        // Enable Arcade Physics
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+        
+        // Set game background
         background = game.add.image(0, 0, 'space');
         
-        player = game.add.sprite(game.world.centerX, game.world.height - 45, 'mummy');
+        // Creates the surface
+        surface = game.add.group();
+        surface.enableBody = true;
         
+        var floor = surface.create(0, game.world.height - 64, 'ground');
+        floor.body.immovable = true;
+        
+        // Creates the player
+        player = game.add.sprite(game.world.centerX, game.world.height - 106, 'mummy');
+        
+        // Player's Physics
+        game.physics.arcade.enable(player);
+        player.body.gravity.y = 100;
+        player.body.colliderWorldBounds = true;
+        
+        // Player's Movements
+        player.animations.add('left', [5,4,3,2,1]);
+        player.animations.add('right');
+        
+        // Sets up music
         theme = game.add.audio('core');
-        theme.play()
+        theme.play();
     }
     
     function update()
     {
-        
+        game.physics.arcade.collide(player, surface);
     }
 };
