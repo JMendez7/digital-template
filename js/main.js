@@ -18,6 +18,8 @@ window.onload = function() {
     function preload()
     {
         game.load.image('space', 'assets/pics/space.png');
+        game.load.image('ground', 'assets/pics/ground.png');
+        game.load.spritesheet('mummy', 'assets/sprites/metalslug_mummy37x45.png', 37, 45, 18);
         game.load.audio('core', 'assets/audio/core.mp3');
     }
     
@@ -28,6 +30,8 @@ window.onload = function() {
     function create()
     {
         background = game.add.image(0, 0, 'space');
+        
+        player = game.add.sprite(game.world.centerX, game.world.height - 45, 'mummy');
         
         theme = game.add.audio('core');
         theme.play()
