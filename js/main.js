@@ -70,7 +70,7 @@ window.onload = function() {
         // Player's Physics
         game.physics.arcade.enable(player);
         player.body.gravity.y = 250;
-        player.body.colliderWorldBounds = true;
+        player.body.collideWorldBounds = true;
         
         // Player's Movements
         player.animations.add('left', [4, 3, 2, 1, 18, 17, 16]);
